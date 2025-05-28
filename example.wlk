@@ -1,10 +1,18 @@
-class ArmaFilosa{
-  var filo
-  var logitud
+object armaFilosa{
+  var property longitud = 0
+  var property filo = 0
 
-  method valorAportado() = filo*logitud
+  method valorDeAtaque() = longitud*filo
 
-  method initialize(){
-    if (not filo.between(0, 1)) self.error(filo + "no es un filo valido")
-  }
+  method asignarFilo(unFilo) {filo = ((unFilo).min(1)).max(0)}
+}
+
+object armaContundente {
+  var property peso = 0
+
+  method valorDeAtaque() = peso
+}
+
+object casco {
+  method otorga() {}
 }

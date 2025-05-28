@@ -1,9 +1,10 @@
-object pepita {
-  var energy = 100
+class ArmaFilosa{
+  var filo
+  var logitud
 
-  method energy() = energy
+  method valorAportado() = filo*logitud
 
-  method fly(minutes) {
-    energy = energy - minutes * 3
+  method initialize(){
+    if (not filo.between(0, 1)) self.error(filo + "no es un filo valido")
   }
 }

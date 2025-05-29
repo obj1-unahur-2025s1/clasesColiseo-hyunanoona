@@ -14,5 +14,21 @@ object armaContundente {
 }
 
 object casco {
-  method otorga() {}
+  method beneficio(destrezaBase) = 10
+}
+
+object escudo{
+  method beneficio(destrezaBase) = (destrezaBase*10)/100 + 5
+}
+
+class Mirmillones{
+  var fuerza 
+  var vida = 100
+  var armaduraActual 
+  const arma = armaFilosa
+  const puntosDeArmadura = armaduraActual.beneficio(self.destreza())
+
+  method destreza() = 15
+
+  method defensa() = self.destreza() + puntosDeArmadura 
 }

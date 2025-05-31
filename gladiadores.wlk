@@ -1,3 +1,5 @@
+import grupos.*
+
 //gladiadores 
 
 class Mirmillones{
@@ -6,9 +8,17 @@ class Mirmillones{
   var armaduraActual 
   const arma = armaFilosa
 
-  method puntosDeArmadura() = armaduraActual.beneficio(self.destreza())
+  method vida() = vida
+
+  method recibirCuracion() {vida = 100}
+
+  method puedeCombatir() = vida > 1
+  
+  method fuerza() = fuerza
 
   method destreza() = 15
+
+  method puntosDeArmadura() = armaduraActual.beneficio(self.destreza())
 
   method defensa() = self.destreza() + self.puntosDeArmadura() 
 
@@ -20,14 +30,20 @@ class Mirmillones{
 
   method recibirAtaqueYContraatacar(unValor, unGladiador) {
     vida = vida - unValor
-    self.atacar(unGladiador)
+    if (self.puedeCombatir()) self.atacar(unGladiador)
   }
+
+  method crearGrupo(unGladiador){new Grupo(nombre = "mirmillolandia", gladiadores = [self, unGladiador])}
 }
 
 class Dimachaerus{
-  var vida = 100
+  var property vida = 100
   var armas 
   var destreza
+  
+  method recibirCuracion() {self.vida(100)}
+
+  method puedeCombatir() = vida > 1
 
   method fuerza() = 10
 
@@ -42,7 +58,15 @@ class Dimachaerus{
 
   method recibirAtaqueYContraatacar(unValor, unGladiador) {
     vida = vida - unValor
-    self.atacar(unGladiador)
+    if (self.puedeCombatir()) self.atacar(unGladiador)
+  }
+
+  method crearGrupo(unGladiador) {new Grupo(nombre = self.generarNombreGrupo(unGladiador), gladiadores = [self, unGladiador])}
+
+  method generarNombreGrupo(unGladiador){
+    const sumaPoderes = self.poderDeAtaque() + unGladiador.poderDeAtaque()
+      
+    return "D -" + sumaPoderes.toString()
   }
 }
 
